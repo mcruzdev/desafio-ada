@@ -19,7 +19,7 @@ import { makeDeleteCardController } from "../main/factories/controllers/delete-c
 import { makeFindAllCardsController } from "../main/factories/controllers/find-all-cards-controller-factory";
 import { makeFindCardController } from "../main/factories/controllers/find-card-controller-factory";
 import { makeUpdateCardController } from "../main/factories/controllers/update-card-controller-factory";
-import { handleUnauthorizedMiddleware } from "../presentation/middlewares/handler-unauthorized";
+import { handleUnauthorizedMiddleware } from "../infra/security/middlewares/handler-unauthorized";
 import { makeLoginController } from "../main/factories/controllers/login-controller-factory";
 
 const app = express();

@@ -6,6 +6,7 @@ export class Login implements LoginUseCase {
 
   async execute(input: LoginInput): Promise<LoginOutput> {
     const { login, senha } = input;
+
     if (process.env.LOGIN == login && process.env.SENHA == senha) {
       const token = JwtAdapter.generateToken(login);
       return {
