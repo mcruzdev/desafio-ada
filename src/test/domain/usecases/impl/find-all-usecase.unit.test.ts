@@ -1,7 +1,6 @@
-import { MockCardRepository } from "../../../../__test__/mocks/mock-card-repository";
-import { Card } from "../../../entities/card";
-import { DeleteCard } from "../delete-card-usecase";
-import { FindAllCards } from "../find-all-cards-usecase";
+import { Card } from "../../../../domain/entities/card";
+import { FindAllCards } from "../../../../domain/usecases/impl/find-all-cards-usecase";
+import { MockCardRepository } from "../../../../test/mocks/mock-card-repository";
 
 type Sut = {
   sut: FindAllCards;
@@ -16,11 +15,12 @@ const makeSut = (): Sut => {
     repository,
   };
 };
+
 describe("Find All Cards Use Case", () => {
   it("when repository returns success true should return true", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockFindAll = (): Card[] => [
+    repository.mockFindAll = async (): Promise<Card[]> => [
       {
         conteudo: "any_conteudo",
         lista: "any_lista",
@@ -37,7 +37,7 @@ describe("Find All Cards Use Case", () => {
   it("when repository returns success false should return false", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockFindAll = () => [];
+    repository.mockFindAll = async () => [];
 
     const output = await sut.execute();
 

@@ -1,6 +1,6 @@
-import { MockCardRepository } from "../../../../__test__/mocks/mock-card-repository";
-import { Card } from "../../../entities/card";
-import { FindCard } from "../find-card-usecase";
+import { Card } from "../../../../domain/entities/card";
+import { FindCard } from "../../../../domain/usecases/impl/find-card-usecase";
+import { MockCardRepository } from "../../../../test/mocks/mock-card-repository";
 
 type Sut = {
   sut: FindCard;
@@ -15,13 +15,14 @@ const makeSut = (): Sut => {
     repository,
   };
 };
+
 describe("Find Card Use Case", () => {
   it("when card does not exist should return found false", async () => {
     const { sut, repository } = makeSut();
 
     let idSpy: string = "";
 
-    repository.mockFindById = (id: string): Card | null => {
+    repository.mockFindById = async (id: string): Promise<Card | null> => {
       idSpy = id;
       return null;
     };

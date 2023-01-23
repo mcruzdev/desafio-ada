@@ -1,32 +1,10 @@
-import { Card } from "../../../entities/card";
-import { CardRepository } from "../../../repositories/card-repository";
-import { UpdateCard } from "../update-card-usecase";
+import { UpdateCard } from "../../../../domain/usecases/impl/update-card-usecase";
+import { MockCardRepository } from "../../../../test/mocks/mock-card-repository";
 
 type Sut = {
   sut: UpdateCard;
   repository: MockCardRepository;
 };
-
-export class MockCardRepository implements CardRepository {
-  mockFindById: Function = () => {};
-  mockUpdate: Function = () => {};
-
-  save(card: Card): Promise<Card> {
-    throw new Error("Method not implemented.");
-  }
-  findById(id: string): Promise<Card | null> {
-    return this.mockFindById();
-  }
-  findAll(): Promise<Card[]> {
-    throw new Error("Method not implemented.");
-  }
-  delete(id: string): Promise<boolean> {
-    throw new Error("Method not implemented.");
-  }
-  update(id: string, card: Card): Promise<boolean> {
-    return this.mockUpdate();
-  }
-}
 
 const makeSut = (): Sut => {
   const repository = new MockCardRepository();
@@ -36,6 +14,7 @@ const makeSut = (): Sut => {
     repository,
   };
 };
+
 describe("Update Card Use Case", () => {
   it("when lista is invalid should return errors", async () => {
     const { sut } = makeSut();
@@ -105,7 +84,7 @@ describe("Update Card Use Case", () => {
   it("when the repository does not find the card should return not found true", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockFindById = () => null;
+    repository.mockFindById = async () => null;
 
     const output = await sut.execute({
       conteudo: "any_conteudo",
@@ -120,7 +99,7 @@ describe("Update Card Use Case", () => {
   it("when the repository updates the card should return success true", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockFindById = () => ({
+    repository.mockFindById = async () => ({
       id: "any_uuidv4",
       conteudo: "any_conteudo",
       lista: "any_lista",
@@ -134,7 +113,7 @@ describe("Update Card Use Case", () => {
       titulo: "any_titulo_new",
     };
 
-    repository.mockUpdate = () => true;
+    repository.mockUpdate = async () => true;
 
     const output = await sut.execute(input);
 

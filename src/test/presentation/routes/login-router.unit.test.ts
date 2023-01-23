@@ -1,17 +1,11 @@
 import {
-  CreateCardInput,
-  CreateCardOutput,
-  CreateCardUseCase,
-} from "../../../domain/usecases/create-card-usecase";
-import {
   LoginInput,
   LoginOutput,
   LoginUseCase,
 } from "../../../domain/usecases/login-usecase";
-import { HttpRequest } from "../../contracts";
-import { InvalidRequestError } from "../../errors";
-import { CreateCardRouter } from "../create-card-router";
-import { LoginRouter } from "../login-router";
+import { HttpRequest } from "../../../presentation/contracts";
+import { InvalidRequestError } from "../../../presentation/errors";
+import { LoginRouter } from "../../../presentation/routes/login-router";
 
 type Sut = {
   sut: LoginRouter;
@@ -20,7 +14,7 @@ type Sut = {
 
 export class MockUseCase implements LoginUseCase {
   mockExecute: Function = () => {};
-  async execute(input: LoginInput): Promise<LoginOutput> {
+  async execute(_: LoginInput): Promise<LoginOutput> {
     return this.mockExecute();
   }
 }

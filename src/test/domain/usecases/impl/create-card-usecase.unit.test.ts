@@ -1,5 +1,5 @@
-import { MockCardRepository } from "../../../../__test__/mocks/mock-card-repository";
-import { CreateCard } from "../create-card-usecase";
+import { MockCardRepository } from "../../../mocks/mock-card-repository";
+import { CreateCard } from "../../../../domain/usecases/impl/create-card-usecase";
 
 type Sut = {
   sut: CreateCard;
@@ -14,6 +14,7 @@ const makeSut = (): Sut => {
     repository,
   };
 };
+
 describe("Create Card Use Case", () => {
   it("when lista is invalid should return errors", async () => {
     const { sut } = makeSut();
@@ -73,12 +74,12 @@ describe("Create Card Use Case", () => {
       titulo: "any_titulo_new",
     };
 
-    repository.mockSave = () => ({
+    repository.mockSave = async () => ({
       ...input,
       id: "any_uuidv4_new",
     });
 
-    repository.mockUpdate = () => true;
+    repository.mockUpdate = async () => true;
 
     const output = await sut.execute(input);
 

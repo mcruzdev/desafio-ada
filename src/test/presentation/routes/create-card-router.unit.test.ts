@@ -1,26 +1,16 @@
-import {
-  CreateCardInput,
-  CreateCardOutput,
-  CreateCardUseCase,
-} from "../../../domain/usecases/create-card-usecase";
-import { HttpRequest } from "../../contracts";
-import { InvalidRequestError } from "../../errors";
-import { CreateCardRouter } from "../create-card-router";
+import { CreateCardOutput } from "../../../domain/usecases/create-card-usecase";
+import { HttpRequest } from "../../../presentation/contracts";
+import { InvalidRequestError } from "../../../presentation/errors";
+import { CreateCardRouter } from "../../../presentation/routes/create-card-router";
+import { MockLoginUseCase } from "../../mocks/mock-login-usecase";
 
 type Sut = {
   sut: CreateCardRouter;
-  useCase: MockUseCase;
+  useCase: MockLoginUseCase;
 };
 
-export class MockUseCase implements CreateCardUseCase {
-  mockExecute: Function = () => {};
-  async execute(input: CreateCardInput): Promise<CreateCardOutput> {
-    return this.mockExecute();
-  }
-}
-
 const makeSut = (): Sut => {
-  const useCase: MockUseCase = new MockUseCase();
+  const useCase: MockLoginUseCase = new MockLoginUseCase();
   return {
     sut: new CreateCardRouter(useCase),
     useCase,
@@ -49,7 +39,7 @@ describe("Create Card Router", () => {
       },
     };
 
-    useCase.mockExecute = () => {
+    useCase.mockExecute = async () => {
       return {
         errors: [
           {
@@ -77,7 +67,7 @@ describe("Create Card Router", () => {
       },
     };
 
-    useCase.mockExecute = () => {
+    useCase.mockExecute = async () => {
       throw new Error();
     };
 
@@ -97,7 +87,7 @@ describe("Create Card Router", () => {
       },
     };
 
-    useCase.mockExecute = (): CreateCardOutput => {
+    useCase.mockExecute = async (): Promise<CreateCardOutput> => {
       return {
         conteudo: "any_conteudo",
         id: "any_uuidv4",

@@ -1,5 +1,5 @@
-import { MockCardRepository } from "../../../../__test__/mocks/mock-card-repository";
-import { DeleteCard } from "../delete-card-usecase";
+import { DeleteCard } from "../../../../domain/usecases/impl/delete-card-usecase";
+import { MockCardRepository } from "../../../../test/mocks/mock-card-repository";
 
 type Sut = {
   sut: DeleteCard;
@@ -14,11 +14,12 @@ const makeSut = (): Sut => {
     repository,
   };
 };
+
 describe("Delete Card Use Case", () => {
   it("when repository returns success true should return true", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockDelete = () => true;
+    repository.mockDelete = async () => true;
 
     const output = await sut.execute({
       id: "anny_uuidv4",
@@ -30,7 +31,7 @@ describe("Delete Card Use Case", () => {
   it("when repository returns success false should return false", async () => {
     const { sut, repository } = makeSut();
 
-    repository.mockDelete = () => false;
+    repository.mockDelete = async () => false;
 
     const output = await sut.execute({
       id: "anny_uuidv4",

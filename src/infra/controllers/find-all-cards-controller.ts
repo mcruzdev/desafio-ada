@@ -6,7 +6,7 @@ export class FindAllCardsController {
   constructor(private readonly findAllCardsUseCase: FindAllCardsUseCase) {}
 
   async handle(
-    request: Request,
+    _: Request,
     response: Response
   ): Promise<Response<HttpResponse>> {
     const output = await this.findAllCardsUseCase.execute();
