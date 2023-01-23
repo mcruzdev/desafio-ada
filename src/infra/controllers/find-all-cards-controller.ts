@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { FindAllCardsUseCase } from "../../domain/usecases/find-all-cards-usecase";
 import {
   expressRequestAdapter,
   expressResponse,
