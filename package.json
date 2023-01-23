@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts SCOPE=dev",
     "test:unit": "jest --testPathPattern=\\.unit.test.ts",
     "test:it": "ENV_FILE=.env.integration_test jest --testPathPattern=\\.it.test.ts",
-    "test:ci": "ENV_FILE=.env.integration_test jest --coverage",
+    "test:ci": "ENV_FILE=.env.integration_test jest --coverage --colors",
     "build": "npx tsc"
   },
   "dependencies": {
