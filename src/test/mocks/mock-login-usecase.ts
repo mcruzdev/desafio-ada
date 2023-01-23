@@ -1,12 +1,12 @@
 import {
-  CreateCardInput,
-  CreateCardOutput,
-  CreateCardUseCase,
-} from "../../domain/usecases/create-card-usecase";
+  LoginInput,
+  LoginOutput,
+  LoginUseCase,
+} from "../../domain/usecases/login-usecase";
 
-export class MockLoginUseCase implements CreateCardUseCase {
+export class MockLoginUseCase implements LoginUseCase {
   mockExecute: Function = async () => {};
-  async execute(_: CreateCardInput): Promise<CreateCardOutput> {
+  async execute(_: LoginInput): Promise<LoginOutput> {
     return await this.mockExecute();
   }
 }

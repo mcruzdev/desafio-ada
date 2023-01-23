@@ -45,6 +45,6 @@ export const notFound = (body: any): HttpResponse => {
 
 export const noContent = (): HttpResponse => {
   return {
-    statusCode: 200,
+    statusCode: 204,
   };
 };
