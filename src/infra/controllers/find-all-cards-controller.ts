@@ -1,19 +1,23 @@
 import { Request, Response } from "express";
 import { FindAllCardsUseCase } from "../../domain/usecases/find-all-cards-usecase";
-import { HttpResponse } from "../../presentation/contracts";
+import {
+  expressRequestAdapter,
+  expressResponse,
+} from "../../presentation/adapters/express-adapter";
+import { HttpRequest, HttpResponse } from "../../presentation/contracts";
+import { FindAllCardsRouter } from "../../presentation/routes/find-all-cards-router";
 
 export class FindAllCardsController {
-  constructor(private readonly findAllCardsUseCase: FindAllCardsUseCase) {}
+  constructor(private readonly findAllCardsRouter: FindAllCardsRouter) {}
 
   async handle(
-    _: Request,
+    request: Request,
     response: Response
   ): Promise<Response<HttpResponse>> {
-    const output = await this.findAllCardsUseCase.execute();
-
-    return response.status(200).json({
-      statusCode: 200,
-      body: output,
-    });
+    const httpRequest: HttpRequest = expressRequestAdapter(request);
+    const httpResponse: HttpResponse = await this.findAllCardsRouter.route(
+      httpRequest
+    );
+    return expressResponse(response, httpResponse);
   }
 }
