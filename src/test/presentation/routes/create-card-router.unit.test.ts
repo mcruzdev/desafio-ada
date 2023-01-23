@@ -2,15 +2,15 @@ import { CreateCardOutput } from "../../../domain/usecases/create-card-usecase";
 import { HttpRequest } from "../../../presentation/contracts";
 import { InvalidRequestError } from "../../../presentation/errors";
 import { CreateCardRouter } from "../../../presentation/routes/create-card-router";
-import { MockLoginUseCase } from "../../mocks/mock-login-usecase";
+import { MockCreateCardUseCase } from "../../mocks/mock-create-card-usecase";
 
 type Sut = {
   sut: CreateCardRouter;
-  useCase: MockLoginUseCase;
+  useCase: MockCreateCardUseCase;
 };
 
 const makeSut = (): Sut => {
-  const useCase: MockLoginUseCase = new MockLoginUseCase();
+  const useCase: MockCreateCardUseCase = new MockCreateCardUseCase();
   return {
     sut: new CreateCardRouter(useCase),
     useCase,

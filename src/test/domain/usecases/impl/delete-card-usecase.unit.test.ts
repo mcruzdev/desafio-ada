@@ -16,8 +16,26 @@ const makeSut = (): Sut => {
 };
 
 describe("Delete Card Use Case", () => {
+  it("when card does not exist should return exists false", async () => {
+    const { sut, repository } = makeSut();
+
+    repository.mockFindById = async () => {
+      return null;
+    };
+
+    const output = await sut.execute({
+      id: "any_uuidv4",
+    });
+
+    expect(output.exists).toBeFalsy();
+  });
+
   it("when repository returns success true should return true", async () => {
     const { sut, repository } = makeSut();
+
+    repository.mockFindById = async (): Promise<any> => ({
+      id: "any_uuidv4",
+    });
 
     repository.mockDelete = async () => true;
 

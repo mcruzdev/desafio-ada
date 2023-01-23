@@ -4,4 +4,4 @@ export interface DeleteCardUseCase {
 
 export type DeleteCardInput = { id: string };
 
-export type DeleteCardOutput = { success: boolean };
+export type DeleteCardOutput = { success: boolean; exists: boolean };
