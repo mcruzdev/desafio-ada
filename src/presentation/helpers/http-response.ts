@@ -35,3 +35,16 @@ export const created = (body: any): HttpResponse => {
     body,
   };
 };
+
+export const notFound = (body: any): HttpResponse => {
+  return {
+    statusCode: 404,
+    body,
+  };
+};
+
+export const noContent = (): HttpResponse => {
+  return {
+    statusCode: 200,
+  };
+};
