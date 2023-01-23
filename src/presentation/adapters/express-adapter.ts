@@ -4,7 +4,7 @@ import { HttpRequest, HttpResponse } from "../contracts";
 export const expressRequestAdapter = (request: Request): HttpRequest => {
   return {
     body: request.body,
-    queryParams: request.query,
+    queryParams: request.params,
   };
 };
 
