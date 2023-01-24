@@ -46,6 +46,22 @@ describe("Delete Card Router", () => {
     expect(204).toBe(httpResponse.statusCode);
   });
 
+  it("when use case returns success as false and exists as true should returns 500", async () => {
+    const { sut, useCase } = makeSut();
+
+    useCase.execute = async (): Promise<DeleteCardOutput> => ({
+      exists: true,
+      success: false,
+    });
+
+    const httpResponse: HttpResponse = await sut.route({
+      queryParams: {
+        id: "any_uuidv4",
+      },
+    });
+
+    expect(500).toBe(httpResponse.statusCode);
+  });
   it("when use case returns exists as false should returns 404", async () => {
     const { sut, useCase } = makeSut();
 
