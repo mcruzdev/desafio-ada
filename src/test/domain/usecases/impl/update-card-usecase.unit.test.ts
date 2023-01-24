@@ -26,7 +26,7 @@ describe("Update Card Use Case", () => {
       titulo: "any_titulo",
     });
 
-    expect(1).toBe(output.errors.length);
+    expect(1).toBe(output.errors?.length);
   });
 
   it("when conteudo is invalid should return error", async () => {
@@ -39,7 +39,7 @@ describe("Update Card Use Case", () => {
       titulo: "any_titulo",
     });
 
-    expect(1).toBe(output.errors.length);
+    expect(1).toBe(output.errors?.length);
   });
 
   it("when titulo is invalid should return error", async () => {
@@ -52,7 +52,7 @@ describe("Update Card Use Case", () => {
       titulo: "",
     });
 
-    expect(1).toBe(output.errors.length);
+    expect(1).toBe(output.errors?.length);
   });
 
   it("when id is invalid should return error", async () => {
@@ -65,7 +65,7 @@ describe("Update Card Use Case", () => {
       titulo: "any_titulo",
     });
 
-    expect(1).toBe(output.errors.length);
+    expect(1).toBe(output.errors?.length);
   });
 
   it("when all fields are invalid should return 4 errors", async () => {

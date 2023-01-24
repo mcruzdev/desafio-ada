@@ -15,5 +15,5 @@ export type UpdateCardOutput = {
   input?: UpdateCardInput;
   success?: boolean;
   exists?: boolean;
-  errors: FieldError[];
+  errors?: FieldError[];
 };
