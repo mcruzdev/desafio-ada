@@ -11,10 +11,6 @@
     "build": "npx tsc"
   },
   "dependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/express-jwt": "^7.4.2",
-    "@types/jsonwebtoken": "^9.0.1",
-    "ajv": "^8.12.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -26,6 +22,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express-jwt": "^7.4.2",
+    "@types/jsonwebtoken": "^9.0.1",
     "@babel/preset-typescript": "^7.18.6",
     "@jest/globals": "^29.3.1",
     "@types/cors": "^2.8.13",
