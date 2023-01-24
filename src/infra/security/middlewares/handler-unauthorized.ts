@@ -1,4 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { unauthorized } from "../../../presentation/helpers/http-response";
 
 export const handleUnauthorizedMiddleware = (
   err: ErrorRequestHandler,
@@ -7,11 +8,6 @@ export const handleUnauthorizedMiddleware = (
   next: NextFunction
 ) => {
   if (err.name == "UnauthorizedError") {
-    return response.status(401).json({
-      statusCode: 401,
-      body: {
-        message: "unauthorized",
-      },
-    });
+    return unauthorized();
   }
 };
