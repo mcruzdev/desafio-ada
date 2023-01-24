@@ -1,10 +1,8 @@
-import { CreateCardUseCase } from "../../domain/usecases/create-card-usecase";
 import { UpdateCardUseCase } from "../../domain/usecases/update-card-usecase";
 import { HttpRequest, HttpResponse, Router } from "../contracts";
 import { InvalidRequestError } from "../errors";
 import {
   badRequest,
-  created,
   internalServerError,
   notFound,
   ok,
